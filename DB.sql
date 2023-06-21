@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema library
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema library
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `library` DEFAULT CHARACTER SET utf8 ;
+USE `library` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table `library`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `library`.`usuario` (
   `idusr` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`livro`
+-- Table `library`.`livro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
+CREATE TABLE IF NOT EXISTS `library`.`livro` (
   `idlivro` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `pag` INT NOT NULL,
@@ -45,29 +45,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`carrinho`
+-- Table `library`.`carrinho`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`carrinho` (
+CREATE TABLE IF NOT EXISTS `library`.`carrinho` (
   `idcarrinho` INT NOT NULL,
   `livro_idlivro` INT NOT NULL,
   `usuario_idusr` INT NOT NULL,
   PRIMARY KEY (`idcarrinho`),
   CONSTRAINT `fk_carrinho_livro1`
     FOREIGN KEY (`livro_idlivro`)
-    REFERENCES `mydb`.`livro` (`idlivro`)
+    REFERENCES `library`.`livro` (`idlivro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_carrinho_usuario1`
     FOREIGN KEY (`usuario_idusr`)
-    REFERENCES `mydb`.`usuario` (`idusr`)
+    REFERENCES `library`.`usuario` (`idusr`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `mydb`.`compra`
+-- Table `library`.`compra`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`compra` (
+CREATE TABLE IF NOT EXISTS `library`.`compra` (
   `idcompra` INT NOT NULL AUTO_INCREMENT,
   `usuario_idusr` INT NOT NULL,
   `livro_idlivro` INT NOT NULL,
@@ -75,40 +75,40 @@ CREATE TABLE IF NOT EXISTS `mydb`.`compra` (
   PRIMARY KEY (`idcompra`),
   CONSTRAINT `fk_compra_usuario`
     FOREIGN KEY (`usuario_idusr`)
-    REFERENCES `mydb`.`usuario` (`idusr`)
+    REFERENCES `library`.`usuario` (`idusr`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compra_livro1`
     FOREIGN KEY (`livro_idlivro`)
-    REFERENCES `mydb`.`livro` (`idlivro`)
+    REFERENCES `library`.`livro` (`idlivro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compra_carrinho1`
     FOREIGN KEY (`carrinho_idcarrinho`)
-    REFERENCES `mydb`.`carrinho` (`idcarrinho`)
+    REFERENCES `library`.`carrinho` (`idcarrinho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `mydb`.`genero`
+-- Table `library`.`genero`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`genero` (
+CREATE TABLE IF NOT EXISTS `library`.`genero` (
   `idgenero` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `livro_idlivro` INT NOT NULL,
   PRIMARY KEY (`idgenero`),
   CONSTRAINT `fk_genero_livro1`
     FOREIGN KEY (`livro_idlivro`)
-    REFERENCES `mydb`.`livro` (`idlivro`)
+    REFERENCES `library`.`livro` (`idlivro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `mydb`.`admin`
+-- Table `library`.`admin`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`admin` (
+CREATE TABLE IF NOT EXISTS `library`.`admin` (
   `idadmin` INT NOT NULL AUTO_INCREMENT,
   `identficacao` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
