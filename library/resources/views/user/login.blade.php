@@ -6,6 +6,10 @@
     <div>{{session('sucesso')}}</div>
 @endif
 
+@if (session('erro'))
+    <div>{{session('erro')}}</div>
+@endif
+
 @if ($errors)
     @foreach ($errors->all() as $erro)
         {{$erro}} <br>
@@ -15,7 +19,7 @@
     <form action="" method="POST">
         @csrf
         <input type="email" name="email" placeholder="Email"> <br>
-        <input type="password" name="senha" placeholder="Senha">
+        <input type="password" name="password" placeholder="Senha">
 <br><br>
         <input type="submit" value="Entrar">
     </form>

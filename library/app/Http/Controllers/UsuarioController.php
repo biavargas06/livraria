@@ -5,10 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class UsuarioController extends Controller
 {
-    public function login(){
+    public function login(Request $request){
+        if($request->isMethod('POST')){
+            $data = $request->validate([
+                'email' => 'required',
+                'password' => 'required',
+            ]);
+            if (Auth::attempt($data)){
+                return redirect()->route('home');
+            } else {
+                return redirect()->route('login')->with('erro', 'Email ou senha incorretos');
+            }
+        }
         return view('user.login');
     }
 
@@ -27,4 +40,5 @@ class UsuarioController extends Controller
         Usuario::create($dados);
         return redirect()->route('login')->with('sucesso', 'Conta Criada com sucesso!');
     }
+
 }
