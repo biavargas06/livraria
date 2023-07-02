@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/login', [UsuarioController::class, 'login'])->name('login');
-Route::post('/login', [UsuarioController::class, 'login'])->name('login');
+Route::post('/login', [UsuarioController::class, 'login']);
 
 Route::get('/register', [UsuarioController::class, 'register'])->name('register');
+Route::post('/register', [UsuarioController::class, 'regSuccess'])->name('register.addSuccess');
 

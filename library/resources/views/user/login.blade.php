@@ -2,6 +2,16 @@
 
     <h1>Login</h1>
 
+    @if (session('sucesso'))
+    <div>{{session('sucesso')}}</div>
+@endif
+
+@if ($errors)
+    @foreach ($errors->all() as $erro)
+        {{$erro}} <br>
+        @endforeach
+    @endif
+
     <form action="" method="POST">
         @csrf
         <input type="email" name="email" placeholder="Email"> <br>
@@ -10,5 +20,6 @@
         <input type="submit" value="Entrar">
     </form>
 
-    Não tem uma conta? <a href="{{route('register')}}">Cadastre-se</a>
+    Não tem uma conta? <a href="{{route('register')}}">Cadastre-se</a> <br>
+    <a href="{{route('home')}}">Voltar</a>
 </div>

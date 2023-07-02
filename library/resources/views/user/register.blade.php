@@ -2,14 +2,21 @@
 
     <h1>Register</h1>
 
-    <form action="" method="POST">
+    @if ($errors)
+    @foreach ($errors->all() as $erro)
+        {{$erro}} <br>
+        @endforeach
+    @endif
+
+    <form action="{{ url()->current()}}" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Nome"><br>
+        <input type="text" name="nome" placeholder="Nome"><br>
         <input type="email" name="email" placeholder="Email"> <br>
-        <input type="password" name="senha" placeholder="Senha">
+        <input type="password" name="password" placeholder="Senha">
 <br><br>
         <input type="submit" value="Cadastrar">
     </form>
 
-    Já possui uma conta? <a href="{{route('login')}}">Logue aqui</a>
+    Já possui uma conta? <a href="{{route('login')}}">Logue aqui</a> <br>
+    <a href="{{route('home')}}">Voltar</a>
 </div>
