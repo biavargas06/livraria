@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\LivroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,13 @@ Route::post('/login', [UsuarioController::class, 'login']);
 
 Route::get('/register', [UsuarioController::class, 'register'])->name('register');
 Route::post('/register', [UsuarioController::class, 'regSuccess'])->name('register.addSuccess');
+
+Route::get('/new-book', [LivroController::class, 'book'])->name('book');
+Route::post('/new-book', [LivroController::class, 'newBook'])->name('book.newBook');
+
+Route::get('/new-book/genre', [LivroController::class, 'genre'])->name('genre');
+Route::post('/new-book/genre', [LivroController::class, 'newGenre'])->name('genre.newGenre');
+
+Route::get('/new-book/genre/new', [LivroController::class, 'index'])->name('genre.view');
+Route::post('/new-book/genre/new', [LivroController::class, 'index'])->name('genre.viewTable');
 

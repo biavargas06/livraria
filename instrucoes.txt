@@ -1,0 +1,11 @@
+para acessar o nosso trabalho e criar um server use:
+
+            cd .\library\
+
+Ai sim ja pode comecar a executar os comandos :D
+
+            php artisan serve
+            
+            php artisan migrate
+
+Por enquanto e so pe-pe-pe-pe-pessoal 🐷

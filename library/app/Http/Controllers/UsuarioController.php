@@ -33,7 +33,7 @@ class UsuarioController extends Controller
         $dados = $form->validate([
             'nome' => 'required|min:3',
             'email' => 'required',
-            'password' => 'string|required',
+            'password' => 'required',
         ]);
         $dados['password'] = Hash::make($dados['password']);
 
