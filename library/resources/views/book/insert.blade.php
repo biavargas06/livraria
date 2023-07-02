@@ -28,6 +28,6 @@
         <input type="submit" value="Adicionar">
     </form>
 
-    Adicione um genero para os livros <a href="{{route('genre')}}">clicando aqui</a> <br>
+    Generos Disponiveis <a href="{{route('genre.view')}}">aqui</a> <br>
     <a href="{{route('home')}}">Voltar</a>
 </div>

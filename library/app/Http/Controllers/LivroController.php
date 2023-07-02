@@ -46,7 +46,7 @@ class LivroController extends Controller
             $busca = $request->busca;
 
             $genero = Genero::where('nome', 'LIKE', "%{$busca}%")
-            ->orderBy('nome')
+            ->orderBy('idgenero')
             ->get();
         }else{
             $genero = Genero::all();
