@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('livrogens', function (Blueprint $table) {
-            $table->id('idlg');
-            $table->unsignedBigInteger('genero_idgenero');
-            $table->unsignedBigInteger('livro_idlivro');
+            $table->id();
+            // $table->unsignedBigInteger('genero_idgenero');
+            // $table->unsignedBigInteger('livro_idlivro');
             $table->timestamps();
 
-            $table->foreign('livro_idlivro')->references('idlivro')->on('livros');
-            $table->foreign('genero_idgenero')->references('idgenero')->on('generos');
+            // $table->foreign('livro_idlivro')->references('idlivro')->on('livros');
+            // $table->foreign('genero_idgenero')->references('idgenero')->on('generos');
         });
 
 

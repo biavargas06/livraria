@@ -8,7 +8,17 @@
 </head>
 <body>
     <h1>Livraria Goldenberg</h1>
+    @if (Auth::user())
+            {{ Auth::user()->nome }} <br>
+            <a href="{{ route('logout') }}">Logout</a>
+
+        @else
+            <a href="{{ route('login') }}">Login</a>
+        @endif
+    </div>
     <hr>
+    <div>
+
 
     @yield('content')
 

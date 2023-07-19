@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('compras', function (Blueprint $table) {
-            $table->id('idcompra');
-            $table->unsignedBigInteger('usuario_idusr');
-            $table->unsignedBigInteger('livro_idlivro');
-            $table->unsignedBigInteger('carrinho_idcarrinho');
+            $table->id();
+            // $table->unsignedBigInteger('usuario_idusr');
+            // $table->unsignedBigInteger('livro_idlivro');
+            // $table->unsignedBigInteger('carrinho_idcarrinho');
             $table->timestamps();
 
-            $table->foreign('usuario_idusr')->references('idusr')->on('usuarios');
-            $table->foreign('livro_idlivro')->references('idlivro')->on('livros');
-            $table->foreign('carrinho_idcarrinho')->references('idcarrinho')->on('carrinhos');
+            // $table->foreign('usuario_idusr')->references('idusr')->on('usuarios');
+            // $table->foreign('livro_idlivro')->references('idlivro')->on('livros');
+            // $table->foreign('carrinho_idcarrinho')->references('idcarrinho')->on('carrinhos');
         });
     }
 

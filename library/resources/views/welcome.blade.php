@@ -5,7 +5,11 @@
 @section('content')
 
 <nav>
+    @if (section('admin'))
     <a href="{{route('book')}}">Adicionar Livro</a>
+    @endif
+
+
 </nav>
 
 

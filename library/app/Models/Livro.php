@@ -17,4 +17,5 @@ class Livro extends Model
         'ano',
         'sinopse',
     ];
+
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Genero;
 use App\Models\Livro;
-use App\Models\Livrogen;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller

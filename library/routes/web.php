@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LivroController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/login', [UsuarioController::class, 'login'])->name('login');
-Route::post('/login', [UsuarioController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::post('/login', [UserController::class, 'login'])->name('login');
 
-Route::get('/register', [UsuarioController::class, 'register'])->name('register');
-Route::post('/register', [UsuarioController::class, 'regSuccess'])->name('register.addSuccess');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::post('/register', [UserController::class, 'regSuccess'])->name('register.addSuccess');
 
 Route::get('/new-book', [LivroController::class, 'book'])->name('book')->middleware('auth');
 Route::post('/new-book', [LivroController::class, 'newBook'])->name('book.newBook');
