@@ -1,4 +1,9 @@
 <div style=" margin-top: 15%">
+
+    @if (session('sucesso'))
+    <div>{{session('sucesso')}}</div>
+@endif
+
     <form action="{{ url()->current()}}" method="POST">
         @csrf
         <input type="text" name="busca">
@@ -16,10 +21,10 @@
 
 
     <tr>
-        <td>{{$genero->idgenero}}</td>
+        <td>{{$genero->id}}</td>
         <td>{{$genero->nome}}</td>
-        <td><a href="">Editar</a></td>
-        <td><a href="">Excluir</a></td>
+        <td><a href="{{route('genre.edit',$genero->id)}}">Editar</a></td>
+        <td><a href="{{route('genre.delete', $genero->id)}}">Excluir</a></td>
     </tr>
 @endforeach
 </table>

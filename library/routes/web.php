@@ -30,9 +30,24 @@ Route::post('/register', [UserController::class, 'regSuccess'])->name('register.
 Route::get('/new-book', [LivroController::class, 'book'])->name('book')->middleware('auth');
 Route::post('/new-book', [LivroController::class, 'newBook'])->name('book.newBook');
 
+Route::get('/new-book/book/view', [LivroController::class, 'searchBook'])->name('book.view')->middleware('auth');
+Route::post('/new-book/book/view', [LivroController::class, 'searchBook'])->name('book.viewTable');
+
+Route::get('/new-book/book/edit/{books}', [LivroController::class, 'editBook'])->name('book.edit')->middleware('auth');
+Route::post('/new-book/book/edit/{books}', [LivroController::class, 'editSaveBook'])->name('book.editSave');
+
+Route::get('/new-book/book/delete/{books}', [LivroController::class, 'deleteBook'])->name('book.delete')->middleware('auth');
+Route::delete('/new-book/book/delete/{books}', [LivroController::class, 'deleteConfirmBook'])->name('book.deleteConfirm');
+
 Route::get('/new-book/genre', [LivroController::class, 'genre'])->name('genre')->middleware('auth');
 Route::post('/new-book/genre', [LivroController::class, 'newGenre'])->name('genre.newGenre');
 
-Route::get('/new-book/genre/new', [LivroController::class, 'index'])->name('genre.view')->middleware('auth');
-Route::post('/new-book/genre/new', [LivroController::class, 'index'])->name('genre.viewTable');
+Route::get('/new-book/genre/new', [LivroController::class, 'search'])->name('genre.view')->middleware('auth');
+Route::post('/new-book/genre/new', [LivroController::class, 'search'])->name('genre.viewTable');
+
+Route::get('/new-book/genre/edit/{genero}', [LivroController::class, 'edit'])->name('genre.edit')->middleware('auth');
+Route::post('/new-book/genre/edit/{genero}', [LivroController::class, 'editSave'])->name('genre.editSave');
+
+Route::get('/new-book/genre/delete/{genero}', [LivroController::class, 'delete'])->name('genre.delete')->middleware('auth');
+Route::delete('/new-book/genre/delete/{genero}', [LivroController::class, 'deleteConfirm'])->name('genre.deleteConfirm');
 

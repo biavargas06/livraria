@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genero;
 use App\Models\Livro;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LivroController extends Controller
 {
@@ -26,6 +27,56 @@ class LivroController extends Controller
         return redirect()->route('book')->with('sucesso', 'Livro adicionado com sucesso!');
     }
 
+    public function searchBook(Request $request){
+        if($request->isMethod('POST')) {
+            $busca = $request->busca;
+
+            $books = Livro::where('nome', 'LIKE', "%{$busca}%")
+            ->orderBy('id')
+            ->get();
+        }else{
+            $books = Livro::all();
+        }
+
+        return view('book.book', [
+            'book' => $books,
+        ]);
+}
+
+public function editBook(Livro $books){
+    return view('book.insertCopy', [
+        'book' => $books,
+    ]);
+}
+public function editSaveBook(Request $form, Livro $books){
+    $dados = $form->validate([
+        'nome' => [
+            'required',
+            Rule::unique('livros')->ignore($books->id)
+        ],
+        'pag' => 'required|numeric',
+        'autor' => 'required',
+        'editora' => 'required',
+        'ano' => 'required',
+        'sinopse' => 'required',
+    ]);
+    $books->fill($dados)->save();
+
+    return redirect()->route('book.view')->with('sucesso', 'Genero alterado com sucesso!');
+}
+
+public function deleteBook(Livro $books){
+    return view('book.deleteBook', [
+        'book' => $books,
+    ]);
+}
+public function deleteConfirmBook(Livro $books){
+    $books->delete();
+
+    return redirect()->route('book.view')->with('sucesso', 'Livro apagado com sucesso!');
+}
+
+
     public function genre(){
         return view('book.insertG');
     }
@@ -40,12 +91,12 @@ class LivroController extends Controller
 
     }
 
-    public function index(Request $request){
+    public function search(Request $request){
         if($request->isMethod('POST')) {
             $busca = $request->busca;
 
             $genero = Genero::where('nome', 'LIKE', "%{$busca}%")
-            ->orderBy('idgenero')
+            ->orderBy('id')
             ->get();
         }else{
             $genero = Genero::all();
@@ -54,6 +105,35 @@ class LivroController extends Controller
         return view('book.genre', [
             'generos' => $genero,
         ]);
+}
+
+public function edit(Genero $genero){
+    return view('book.insertG', [
+        'genre' => $genero,
+    ]);
+}
+public function editSave(Request $form, Genero $genero){
+    $dados = $form->validate([
+        'nome' => [
+            'required',
+            Rule::unique('generos')->ignore($genero->id)
+        ],
+    ]);
+    $genero->fill($dados)->save();
+
+    return redirect()->route('genre.view')->with('sucesso', 'Genero alterado com sucesso!');
+}
+
+
+public function delete(Genero $genero){
+    return view('book.delete', [
+        'genre' => $genero,
+    ]);
+}
+public function deleteConfirm(Genero $genero){
+    $genero->delete();
+
+    return redirect()->route('genre.view')->with('sucesso', 'Genero apagado com sucesso!');
 }
 
 }

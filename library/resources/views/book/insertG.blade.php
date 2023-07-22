@@ -14,7 +14,7 @@
 
     <form action="{{ url()->current()}}" method="POST">
         @csrf
-        <input type="text" name="nome" placeholder="Genero"><br>
+        <input type="text" name="nome" placeholder="Genero" value="{{old('nome', $genre->nome ?? '')}}"><br>
 <br>
         <input type="submit" value="Adicionar">
     </form>
