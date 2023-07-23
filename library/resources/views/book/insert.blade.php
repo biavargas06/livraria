@@ -14,15 +14,15 @@
 
     <form action="{{ url()->current()}}" method="POST">
         @csrf
-        <input type="text" name="nome" placeholder="Titulo do Livro" value="{{old('nome', $book->nome ?? '')}}"><br>
-       <input type="number" name="pag" placeholder="N de paginas" value="{{old('pag', $book->pag ?? '')}}"> <br>
-       <input type="text" name="autor" placeholder="Nome do Autor" value="{{old('autor', $book->autor ?? '')}}"> <br>
-       <input type="text" name="editora" placeholder="Nome da Editora" value="{{old('editora', $book->editora ?? '')}}"> <br>
-       <textarea name="sinopse" cols="40" rows="5" placeholder="Sinopse do livro" value="{{old('sinopse', $book->sinopse ?? '')}}"></textarea>
+        <input type="text" name="nome" placeholder="Titulo do Livro"><br>
+       <input type="number" name="pag" placeholder="N de paginas"> <br>
+       <input type="text" name="autor" placeholder="Nome do Autor"> <br>
+       <input type="text" name="editora" placeholder="Nome da Editora"> <br>
+       <textarea name="sinopse" cols="40" rows="5" placeholder="Sinopse do livro"></textarea>
 
         <fieldset style="margin-left: 40%; margin-right: 40%">
             <legend style="text-align: left">Data de Publicacao:</legend>
-            <input type="date" name="ano" value="{{old('ano', $book->ano ?? '')}}"> <br>
+            <input type="date" name="ano"> <br>
         </fieldset>
 <br>
         <input type="submit" value="Adicionar">

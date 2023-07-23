@@ -9,6 +9,10 @@ class Livro extends Model
 {
     use HasFactory;
 
+
+    public function livrogen(){
+        return $this->hasMany('App\LivroGen');
+    }
     protected $fillable = [
         'nome',
         'pag',

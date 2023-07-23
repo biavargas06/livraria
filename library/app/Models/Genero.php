@@ -9,7 +9,9 @@ class Genero extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    public function livrogen(){
+        return $this->hasMany('App\LivroGen');
+    }    protected $fillable = [
         'nome',
     ];
 }

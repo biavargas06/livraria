@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LivroController;
+use App\Models\Genero;
+use App\Models\Livro;
+use App\Models\LivroGen;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +19,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (Request $request) {
+    if ($request->isMethod('POST')) {
+        $busca = $request->busca;
+
+        $books = Livro::where('nome', 'LIKE', "%{$busca}%")
+            ->orderBy('id')
+            ->get();
+    } else {
+        $livrogen = LivroGen::all();
+
+    }
+    return view('welcome')->with(['LivroGen' => $livrogen]);
+
 })->name('home');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
@@ -50,4 +65,3 @@ Route::post('/new-book/genre/edit/{genero}', [LivroController::class, 'editSave'
 
 Route::get('/new-book/genre/delete/{genero}', [LivroController::class, 'delete'])->name('genre.delete')->middleware('auth');
 Route::delete('/new-book/genre/delete/{genero}', [LivroController::class, 'deleteConfirm'])->name('genre.deleteConfirm');
-
