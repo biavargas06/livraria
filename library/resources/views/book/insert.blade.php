@@ -1,4 +1,4 @@
-<div style="text-align: center; margin-top: 15%">
+<div style="text-align: center; margin-top: 5%">
 
     <h1>Adicionar Um Livro</h1>
 
@@ -24,6 +24,12 @@
             <legend style="text-align: left">Data de Publicacao:</legend>
             <input type="date" name="ano"> <br>
         </fieldset>
+        <label for="generos">Selecione os gêneros:</label> <br>
+    <select name="generos[]" multiple>
+        @foreach ($generos as $genero)
+            <option value="{{ $genero->id }}">{{ $genero->nome }}</option>
+        @endforeach
+    </select>
 <br>
         <input type="submit" value="Adicionar">
     </form>

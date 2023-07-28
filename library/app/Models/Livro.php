@@ -9,17 +9,15 @@ class Livro extends Model
 {
     use HasFactory;
 
+    protected $table = 'livros';
 
-    public function livrogen(){
-        return $this->hasMany('App\LivroGen');
+    protected $fillable = ['id','nome', 'pag', 'autor', 'editora', 'ano', 'sinopse'];
+
+    public function generos()
+    {
+        return $this->belongsToMany(Genero::class, 'livro_gens', 'livro_id', 'genero_id');
     }
-    protected $fillable = [
-        'nome',
-        'pag',
-        'autor',
-        'editora',
-        'ano',
-        'sinopse',
-    ];
+
+
 
 }

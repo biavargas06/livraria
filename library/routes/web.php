@@ -19,19 +19,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {
+Route::match(['get', 'post'], '/', function (Request $request) {
     if ($request->isMethod('POST')) {
         $busca = $request->busca;
 
         $books = Livro::where('nome', 'LIKE', "%{$busca}%")
             ->orderBy('id')
             ->get();
+
+        // Carregar os gêneros para cada livro encontrado
+        $books->load('generos');
     } else {
-        $livrogen = LivroGen::all();
+        $books = Livro::all();
 
+        // Carregar os gêneros para todos os livros
+        $books->load('generos');
     }
-    return view('welcome')->with(['LivroGen' => $livrogen]);
 
+    $livros = Livro::select('livros.id', 'livros.nome', \DB::raw('GROUP_CONCAT(generos.nome SEPARATOR ", ") AS generos'))
+        ->join('livro_gens', 'livros.id', '=', 'livro_gens.livro_id')
+        ->join('generos', 'livro_gens.genero_id', '=', 'generos.id')
+        ->groupBy('livros.id', 'livros.nome')
+        ->get();
+
+    return view('welcome', compact('livros'))->with('books', $books);
 })->name('home');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');

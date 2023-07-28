@@ -10,23 +10,28 @@ use Illuminate\Validation\Rule;
 class LivroController extends Controller
 {
     public function book(){
-        return view('book.insert');
+    $generos = Genero::all();
+    return view('book.insert', compact('generos'));
     }
 
-    public function newBook(Request $form){
-        $dados = $form->validate([
-            'nome' => 'required|min:3',
-            'pag' => 'required',
-            'autor' => 'string|required',
-            'editora' => 'string|required',
-            'ano' => 'required',
-            'sinopse' => 'string|required',
-        ]);
+    public function newBook(Request $request)
+{
+    $dados = $request->validate([
+        'nome' => 'required|min:3',
+        'pag' => 'required',
+        'autor' => 'string|required',
+        'editora' => 'string|required',
+        'ano' => 'required',
+        'sinopse' => 'string|required',
+    ]);
 
-        Livro::create($dados);
-        return redirect()->route('book')->with('sucesso', 'Livro adicionado com sucesso!');
-    }
+    $livro = Livro::create($dados);
 
+    $generoIds = $request->input('generos');
+    $livro->generos()->sync($generoIds);
+
+    return redirect()->route('book')->with('sucesso', 'Livro adicionado com sucesso!');
+}
     public function searchBook(Request $request){
         if($request->isMethod('POST')) {
             $busca = $request->busca;
