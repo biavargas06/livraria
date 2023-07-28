@@ -1,14 +1,11 @@
 <div style="text-align: center; margin-top: 15%">
-
-
-
     <h2>Apagar Livro</h2>
-    <p>Voce esta apagando o genero: {{ $book->nome}}.</p>
+    <p>Voce esta apagando o livro: {{ $book->nome }}.</p>
 
-    <form action="{{route('book.deleteConfirm', $book->id)}}" method="post">
+    <form action="{{ route('book.deleteConfirm', $book->id) }}" method="POST">
         @csrf
-        @method('delete')
-
+        @method('DELETE')
         <input type="submit" value="Apagar">
     </form>
-    <a href="{{route('book.view')}}">Voltar</a>
+    <a href="{{ route('book.view') }}">Voltar</a>
+</div>

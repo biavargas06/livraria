@@ -11,6 +11,8 @@ class Genero extends Model
 
     protected $table = 'generos';
 
+    protected $fillable = ['id', 'nome'];
+
     public function livros()
     {
         return $this->belongsToMany(Livro::class, 'livro_gen', 'genero_id', 'livro_id');

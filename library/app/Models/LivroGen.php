@@ -9,10 +9,12 @@ class LivroGen extends Model
 {
     use HasFactory;
 
-    public function livro(){
+    public function livro()
+    {
         return $this->belongsTo('App\Models\Livro');
     }
-    public function genero(){
+    public function genero()
+    {
         return $this->belongsTo('App\Models\Genero');
     }
     protected $fillable = [

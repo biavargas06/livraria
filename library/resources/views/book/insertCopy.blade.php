@@ -24,6 +24,15 @@
             <legend style="text-align: left">Data de Publicacao:</legend>
             <input type="date" name="ano" value="{{old('ano', $book->ano ?? '')}}"> <br>
         </fieldset>
+
+        <label for="generos">Selecione os gêneros:</label> <br>
+<select name="generos[]" multiple>
+    @foreach ($generos as $genero)
+        <option value="{{ $genero->id }}" @if(in_array($genero->id, $book->generos->pluck('id')->toArray())) selected @endif>
+            {{ $genero->nome }}
+        </option>
+    @endforeach
+</select>
 <br>
         <input type="submit" value="Salvar">
     </form>
