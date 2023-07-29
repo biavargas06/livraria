@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>Livraria Goldenberg</h1>
+    @if (Auth::user() && Auth::user()->isAdmin === 'admin')
+        Admin
+    @endif
     @if (Auth::user())
             {{ Auth::user()->nome }} <br>
             <a href="{{ route('logout') }}">Logout</a>

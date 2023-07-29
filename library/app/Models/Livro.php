@@ -11,8 +11,16 @@ class Livro extends Model
 
     protected $table = 'livros';
 
-    protected $fillable = ['id','nome', 'pag', 'autor', 'editora', 'ano', 'sinopse'];
-
+    protected $fillable = [
+        'nome',
+        'pag',
+        'autor',
+        'editora',
+        'ano',
+        'sinopse',
+        'imagem',
+        'preco',
+    ];
     public function generos()
     {
         return $this->belongsToMany(Genero::class, 'livro_gens', 'livro_id', 'genero_id');

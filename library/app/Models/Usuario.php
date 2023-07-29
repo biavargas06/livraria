@@ -9,9 +9,11 @@ class Usuario extends Authenticatable
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nome',
-        'email',
-        'password',
+    protected $fillable = ['nome', 'email', 'password', 'isAdmin']; // Adicione a coluna "isAdmin" na lista de atributos preenchíveis
+
+    protected $hidden = ['password'];
+
+    protected $casts = [
+        'isAdmin' => 'boolean',
     ];
 }
