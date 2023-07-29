@@ -63,6 +63,39 @@ class LivroController extends Controller
             'book' => $books,
         ]);
     }
+    public function livrosPorGenero($nome)
+    {
+        $livrosQuery = Livro::query();
+
+        // Filtra os livros pelo gênero selecionado
+        $livrosQuery->whereHas('generos', function ($query) use ($nome) {
+            $query->where('generos.nome', $nome);
+        });
+
+        $books = $livrosQuery->get();
+
+        // Carregar os gêneros para cada livro encontrado
+        $books->load('generos');
+
+        $generoSelecionado = Genero::where('nome', $nome)->first();
+
+        // Carregar todos os gêneros
+        $generos = Genero::all();
+
+        $livros = Livro::select('livros.id', 'livros.nome', \DB::raw('GROUP_CONCAT(generos.nome SEPARATOR ", ") AS generos'))
+            ->join('livro_gens', 'livros.id', '=', 'livro_gens.livro_id')
+            ->join('generos', 'livro_gens.genero_id', '=', 'generos.id')
+            ->groupBy('livros.id', 'livros.nome')
+            ->get();
+
+        return view('welcome', compact('livros', 'generos', 'books', 'generoSelecionado'));
+    }
+
+    public function bookPage(Livro $books)
+    {
+        $generos = $books->generos()->pluck('nome')->implode(', ');
+        return view('book.view', compact('books', 'generos'));
+    }
 
     public function editBook(Livro $books)
     {

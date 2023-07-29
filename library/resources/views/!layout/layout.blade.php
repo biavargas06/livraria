@@ -7,18 +7,25 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <h1>Livraria Goldenberg</h1>
-    @if (Auth::user() && Auth::user()->isAdmin === 'admin')
-        Admin
-    @endif
+    <h1><a href="{{route('home')}}">Livraria Goldenberg</a></h1>
     @if (Auth::user())
             {{ Auth::user()->nome }} <br>
-            <a href="{{ route('logout') }}">Logout</a>
-
+            <a href="{{ route('logout') }}">Logout</a> <br>
+            @if (Auth::user() && Auth::user()->isAdmin)
+            <a href="{{ route('book') }}">Gerenciar Livros</a>
+        @endif
         @else
             <a href="{{ route('login') }}">Login</a>
         @endif
-    </div>
+    </div> <br><br>
+
+    <div class="content">
+        <form action="{{ url('/') }}" method="POST">
+            @csrf
+            <input type="text" name="busca" placeholder="Nome do Livro">
+            <input type="submit" value="Buscar">
+        </form>
+
     <hr>
     <div>
 

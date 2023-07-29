@@ -20,21 +20,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['get', 'post'], '/', function (Request $request) {
+    $generos = Genero::all();
+    $livrosQuery = Livro::query();
+
     if ($request->isMethod('POST')) {
         $busca = $request->busca;
 
-        $books = Livro::where('nome', 'LIKE', "%{$busca}%")
-            ->orderBy('id')
-            ->get();
-
-        // Carregar os gêneros para cada livro encontrado
-        $books->load('generos');
-    } else {
-        $books = Livro::all();
-
-        // Carregar os gêneros para todos os livros
-        $books->load('generos');
+        // Filtra os livros pelo nome
+        $livrosQuery->where('nome', 'LIKE', "%{$busca}%");
     }
+
+    if ($request->has('genero_id')) {
+        // Filtra os livros pelo gênero selecionado
+        $genero_id = $request->input('genero_id');
+        $livrosQuery->whereHas('generos', function ($query) use ($genero_id) {
+            $query->where('generos.id', $genero_id); // Especifique a tabela correta usando o alias 'generos.id'
+        });
+    }
+
+    $books = $livrosQuery->get();
+
+    // Carregar os gêneros para cada livro encontrado
+    $books->load('generos');
 
     $livros = Livro::select('livros.id', 'livros.nome', \DB::raw('GROUP_CONCAT(generos.nome SEPARATOR ", ") AS generos'))
         ->join('livro_gens', 'livros.id', '=', 'livro_gens.livro_id')
@@ -42,8 +49,12 @@ Route::match(['get', 'post'], '/', function (Request $request) {
         ->groupBy('livros.id', 'livros.nome')
         ->get();
 
-    return view('welcome', compact('livros'))->with('books', $books);
+    // Definir $generoSelecionado como null
+    $generoSelecionado = null;
+
+    return view('welcome', compact('livros', 'generos', 'generoSelecionado'))->with('books', $books);
 })->name('home');
+Route::get('/genero/{nome}', [LivroController::class, 'livrosPorGenero'])->name('livros.genero');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login');
@@ -58,6 +69,8 @@ Route::post('/new-book', [LivroController::class, 'newBook'])->name('book.newBoo
 
 Route::get('/new-book/book/view', [LivroController::class, 'searchBook'])->name('book.view')->middleware('auth');
 Route::post('/new-book/book/view', [LivroController::class, 'searchBook'])->name('book.viewTable');
+
+Route::get('/new-book/book/book-page/{books}', [LivroController::class, 'bookPage'])->name('book.bookPage');
 
 Route::get('/new-book/book/edit/{books}', [LivroController::class, 'editBook'])->name('book.edit')->middleware('auth');
 Route::post('/new-book/book/edit/{books}', [LivroController::class, 'editSaveBook'])->name('book.editSave');
