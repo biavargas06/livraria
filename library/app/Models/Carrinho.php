@@ -15,4 +15,13 @@ class Carrinho extends Model
     {
         return $this->belongsTo(Livro::class, 'livro_id');
     }
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
+    public function compra()
+    {
+        return $this->belongsTo(Compra::class);
+    }
 }

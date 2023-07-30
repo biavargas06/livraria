@@ -4,6 +4,12 @@
 
 @section('content')
 
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
     <div>
         <h3>Selecione o Gênero:</h3>
         <ul>
@@ -18,7 +24,7 @@
     @endif
 
     @if ($books instanceof \Illuminate\Database\Eloquent\Collection && $books->count() > 0)
-        <table border="1">
+    <table border="1">
             <tr>
                 <th>Imagem</th>
                 <th>Livros</th>
@@ -50,8 +56,10 @@
                         @endif
                     </td>
                     <td>
-                        <a href="">Comprar</a>
+                        <a href="{{ route('shop.checkout', ['id' => $book->id]) }}">Comprar</a>
                     </td>
+
+
                     <td>
                         <form action="{{ route('shop.cartAdd') }}" method="POST">
                             @csrf

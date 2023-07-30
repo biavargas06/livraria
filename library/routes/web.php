@@ -99,3 +99,11 @@ Route::post('/shop/cart/add', [CarrinhoController::class, 'addToCart'])->name('s
 Route::post('/shop/cart/update/{id}', [CarrinhoController::class, 'updateCartItem'])->name('shop.cartUpdate');
 
 Route::delete('/shop/cart/remove/{id}', [CarrinhoController::class, 'removeCartItem'])->name('shop.cartRemove');
+
+Route::get('/shop/checkout/{id?}', [CarrinhoController::class, 'checkout'])->name('shop.checkout')->middleware('auth');
+
+Route::get('/shop/checkoutFromCart/{id}', [CarrinhoController::class, 'checkoutFromCart'])->name('shop.checkoutFromCart')->middleware('auth');
+
+Route::post('/shop/cancel', [CarrinhoController::class, 'cancel'])->name('shop.cancel')->middleware('auth');
+
+Route::post('/shop/finalizar-compra/{id}', [CarrinhoController::class, 'checkoutConfirm'])->name('shop.finalizarCompra')->middleware('auth');

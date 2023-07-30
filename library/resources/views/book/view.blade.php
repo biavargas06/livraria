@@ -27,4 +27,15 @@
         {{ $books->sinopse }}
     </fieldset>
 
+    <td>
+        <a href="{{ route('shop.checkout', ['id' => $books->id]) }}">Comprar</a>
+    </td>
+    <td>
+        <form action="{{ route('shop.cartAdd') }}" method="POST">
+            @csrf
+            <input type="hidden" name="livro_id" value="{{ $books->id }}">
+            <button type="submit">Adicionar ao Carrinho</button>
+        </form>
+    </td>
+
 @endsection

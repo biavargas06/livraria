@@ -8,6 +8,7 @@
     @if ($carrinhoItems->count() > 0)
         <table border="1">
             <tr>
+                <th></th>
                 <th>Livro</th>
                 <th>Preço Unitário</th>
                 <th>Quantidade</th>
@@ -16,6 +17,13 @@
             </tr>
             @foreach ($carrinhoItems as $item)
                 <tr>
+                    <td>
+                        @if ($item->livro->imagem)
+                        <img src="{{ asset('storage/' . $item->livro->imagem) }}" alt="{{ $item->livro->nome }}" width="100">
+                    @else
+                        Sem imagem
+                    @endif
+                </td>
                     <td>{{ $item->livro->nome }}</td>
                     <td>R$ {{ number_format($item->livro->preco, 2, ',', '.') }}</td>
                     <td>
@@ -36,13 +44,20 @@
                 </tr>
             @endforeach
             <tr>
+                <td></td>
                 <td colspan="3">Total</td>
                 <td>R$ {{ number_format($carrinhoItems->sum(function ($item) {
                     return $item->livro->preco * $item->quantidade;
                 }), 2, ',', '.') }}</td>
-                <td></td> <!-- Coluna vazia para alinhar com a última coluna de ações -->
+
             </tr>
         </table>
+
+        <!-- Acessando o primeiro item do carrinho para passar o ID do livro para a rota do Checkout -->
+        <td>
+            <a href="{{ route('shop.checkoutFromCart', ['id' => $carrinhoItems[0]->livro->id]) }}">Finalizar Compra</a>
+        </td>
+
     @else
         <p>Nenhum item no carrinho.</p>
     @endif

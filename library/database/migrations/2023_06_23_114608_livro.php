@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('autor', 100);
             $table->string('editora', 100);
             $table->string('ano', 100);
-            $table->string('sinopse', 100);
+            $table->string('sinopse', 1000);
             $table->string('imagem')->nullable();
             $table->timestamps();
         });

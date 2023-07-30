@@ -96,5 +96,107 @@ class CarrinhoController extends Controller
 
         return redirect()->route('shop.cart');
     }
+    public function checkout($id)
+    {
+        // Verifica se o usuário está autenticado
+        if (Auth::check()) {
+            // Obtém o livro pelo ID
+            $livro = Livro::find($id);
+
+            if (!$livro) {
+                return redirect()->back()->with('error', 'Livro não encontrado.');
+            }
+
+            // Retorna a página de checkout diretamente, passando o livro selecionado
+            return view('shop.checkout', compact('livro'));
+        } else {
+            return redirect()->route('login')->with('error', 'É necessário estar logado para acessar o checkout.');
+        }
+    }
+
+
+    public function checkoutFromCart($id)
+    {
+        // Verifica se o usuário está autenticado
+        if (Auth::check()) {
+            // Obtém o ID do usuário logado
+            $userId = auth()->user()->id;
+
+            // Obtém os itens do carrinho relacionados ao usuário logado
+            $carrinhoItems = Carrinho::where('usuario_id', $userId)->get();
+
+            // Carrega os dados dos livros associados aos itens do carrinho
+            $carrinhoItems->load('livro');
+
+            // Calcula o valor total da compra
+            $total = $carrinhoItems->sum(function ($item) {
+                return $item->livro->preco * $item->quantidade;
+            });
+
+            return view('shop.checkoutFromCart', compact('carrinhoItems', 'total'));
+        } else {
+            // Se o usuário não estiver autenticado, redireciona para a página de login
+            return redirect()->route('login')->with('error', 'É necessário estar logado para acessar o checkout.');
+        }
+    }
+
+    public function addToCartFromWelcome(Request $request)
+    {
+        // Verifica se o usuário está autenticado
+        if (Auth::check()) {
+            $livroId = $request->input('livro_id');
+            $quantidade = 1; // Você pode alterar a quantidade conforme necessário
+
+            // Verifica se o livro existe
+            $livro = Livro::find($livroId);
+
+            if (!$livro) {
+                return redirect()->back()->with('error', 'Livro não encontrado.');
+            }
+
+            // Verifica se o livro já está no carrinho do usuário
+            $carrinho = Carrinho::where('livro_id', $livroId)
+                ->where('usuario_id', Auth::id())
+                ->first();
+
+            if ($carrinho) {
+                // Se o livro já está no carrinho, incrementa a quantidade
+                $quantidade += $carrinho->quantidade;
+                $carrinho->update(['quantidade' => $quantidade]);
+            } else {
+                // Se o livro ainda não está no carrinho, cria um novo registro
+                Carrinho::create([
+                    'livro_id' => $livroId,
+                    'usuario_id' => Auth::id(),
+                    'quantidade' => $quantidade,
+                ]);
+            }
+
+            return redirect()->route('shop.cart')->with('success', 'Livro adicionado ao carrinho com sucesso.');
+        } else {
+            return redirect()->route('login')->with('error', 'É necessário estar logado para adicionar livros ao carrinho.');
+        }
+    }
+
+
+
+    public function cancel(Request $request)
+    {
+        if (Auth::check()) {
+            return redirect()->route('home')->with('success', 'Compra cancelada com sucesso.');
+        } else {
+            return redirect()->route('login')->with('error', 'É necessário estar logado para cancelar a compra.');
+        }
+    }
+
+    public function checkoutConfirm(Request $request)
+    {
+        $userId = auth()->user()->id;
+        Carrinho::where('usuario_id', $userId)->delete();
+
+        $request->session()->flash('success', 'Compra confirmada com sucesso!');
+
+        return redirect()->route('home');
+    }
 
 }
