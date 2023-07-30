@@ -1,3 +1,5 @@
+Baixem o laravel, se ja n tiverem né, tem no yt
+
 para acessar o nosso trabalho e criar um server use:
 
             cd .\library\
