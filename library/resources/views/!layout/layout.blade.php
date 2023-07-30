@@ -7,16 +7,21 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <h1><a href="{{route('home')}}">Livraria Goldenberg</a></h1>
+    <h1>
+        <a href="{{route('home')}}">Livraria Goldenberg</a>
+    </h1>
+
     @if (Auth::user())
             {{ Auth::user()->nome }} <br>
             <a href="{{ route('logout') }}">Logout</a> <br>
+
             @if (Auth::user() && Auth::user()->isAdmin)
             <a href="{{ route('book') }}">Gerenciar Livros</a>
         @endif
         @else
             <a href="{{ route('login') }}">Login</a>
         @endif
+
     </div> <br><br>
 
     <div class="content">
@@ -26,6 +31,7 @@
             <input type="submit" value="Buscar">
         </form>
 
+        <a href="{{route('shop.cart')}}">Carrinho de Compras</a>
     <hr>
     <div>
 

@@ -21,11 +21,15 @@ class Livro extends Model
         'imagem',
         'preco',
     ];
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(Usuario::class, 'carrinhos', 'livro_id', 'usuario_id')
+            ->withPivot('quantidade');
+    }
+
     public function generos()
     {
         return $this->belongsToMany(Genero::class, 'livro_gens', 'livro_id', 'genero_id');
     }
-
-
-
 }

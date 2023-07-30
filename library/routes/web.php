@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LivroController;
 use App\Models\Genero;
@@ -89,3 +90,12 @@ Route::post('/new-book/genre/edit/{genero}', [LivroController::class, 'editSave'
 
 Route::get('/new-book/genre/delete/{genero}', [LivroController::class, 'delete'])->name('genre.delete')->middleware('auth');
 Route::delete('/new-book/genre/delete/{genero}', [LivroController::class, 'deleteConfirm'])->name('genre.deleteConfirm');
+
+Route::get('/shop/cart', [CarrinhoController::class, 'cartPage'])
+    ->name('shop.cart')
+    ->middleware('auth');
+Route::post('/shop/cart/add', [CarrinhoController::class, 'addToCart'])->name('shop.cartAdd');
+
+Route::post('/shop/cart/update/{id}', [CarrinhoController::class, 'updateCartItem'])->name('shop.cartUpdate');
+
+Route::delete('/shop/cart/remove/{id}', [CarrinhoController::class, 'removeCartItem'])->name('shop.cartRemove');

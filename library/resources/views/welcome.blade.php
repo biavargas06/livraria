@@ -53,7 +53,11 @@
                         <a href="">Comprar</a>
                     </td>
                     <td>
-                        <a href="">Adicionar ao Carrinho</a>
+                        <form action="{{ route('shop.cartAdd') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="livro_id" value="{{ $book->id }}">
+                            <button type="submit">Adicionar ao Carrinho</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
