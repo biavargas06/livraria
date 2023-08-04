@@ -1,13 +1,21 @@
-Baixem o laravel, se ja n tiverem né, tem no yt
-            composer install
-para acessar o nosso trabalho e criar um server use:
+Baixem o composer, se ja n tiverem né, tem no yt;
 
-            cd .\library\
+Utilizem esse comando no terminal:
 
-Ai sim ja pode comecar a executar os comandos :D
+| cd .\library\
 
-            php artisan serve
+E depois esse:
+
+| composer install
+
+Para carregar as imagens do banco Utilizem esse comando:
+
+| php artisan storage:link
+
+Para começar um server e criar o banco de dados:
+
+| php artisan serve
             
-            php artisan migrate
+| php artisan migrate
 
-Por enquanto e so pe-pe-pe-pe-pessoal 🐷
+Vai aparecer que vocês não tem uma chave gerada, só clicar em gerar chave.
