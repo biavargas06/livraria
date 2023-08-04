@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class LivroController extends Controller
 {
+
+
+    
     public function book()
     {
         $generos = Genero::all();
@@ -93,6 +96,7 @@ class LivroController extends Controller
 
     public function bookPage(Livro $books)
     {
+        die;
         $generos = $books->generos()->pluck('nome')->implode(', ');
         return view('book.view', compact('books', 'generos'));
     }

@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class CarrinhoController extends Controller
 {
 
+    public function coutCart()
+    {
+        $cartItemCount = Carrinho::count();
+        die($cartItemCount);
+
+        View::share('cartItemCount', $cartItemCount);
+        return view('lY.cart');
+    }
+
     public function cartPage()
     {
         // Obtém o ID do usuário logado

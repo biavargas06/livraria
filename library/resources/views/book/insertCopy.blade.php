@@ -15,7 +15,7 @@
     <form action="{{ url()->current()}}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="nome" placeholder="Titulo do Livro" value="{{old('nome', $book->nome ?? '')}}"><br>
-       <input type="number" name="pag" placeholder="N de paginas" value="{{old('pag', $book->pag ?? '')}}"> <br>
+       <input type="number" name="pag" min="5" placeholder="N de paginas" value="{{old('pag', $book->pag ?? '')}}"> <br>
        <input type="text" name="autor" placeholder="Nome do Autor" value="{{old('autor', $book->autor ?? '')}}"> <br>
        <input type="text" name="editora" placeholder="Nome da Editora" value="{{old('editora', $book->editora ?? '')}}"> <br>
        <textarea name="sinopse" cols="40" rows="5" placeholder="Sinopse do livro">{{old('sinopse', $book->sinopse ?? '')}}</textarea>

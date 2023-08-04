@@ -15,7 +15,7 @@
     <form action="{{ url()->current() }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="nome" placeholder="Titulo do Livro"><br>
-        <input type="number" name="pag" placeholder="N de paginas"> <br>
+        <input type="number" name="pag" min="5" placeholder="N de paginas"> <br>
         <input type="text" name="autor" placeholder="Nome do Autor"> <br>
         <input type="text" name="editora" placeholder="Nome da Editora"> <br>
         <textarea name="sinopse" cols="40" rows="5" placeholder="Sinopse do livro"></textarea>

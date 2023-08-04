@@ -4,6 +4,7 @@ use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LivroController;
 use App\Models\Genero;
+use App\Models\Carrinho;
 use App\Models\Livro;
 use App\Models\LivroGen;
 use Illuminate\Http\Request;
@@ -21,6 +22,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['get', 'post'], '/', function (Request $request) {
+    $cartItemCount = Carrinho::where('usuario_id', '=', 2)
+    ->count('carrinhos')
+    ->get();
+
+    
+
     $generos = Genero::all();
     $livrosQuery = Livro::query();
 
@@ -53,8 +60,9 @@ Route::match(['get', 'post'], '/', function (Request $request) {
     // Definir $generoSelecionado como null
     $generoSelecionado = null;
 
-    return view('welcome', compact('livros', 'generos', 'generoSelecionado'))->with('books', $books);
+    return view('welcome', compact('livros', 'generos', 'generoSelecionado', 'cartItemCount'))->with('books', $books);
 })->name('home');
+
 Route::get('/genero/{nome}', [LivroController::class, 'livrosPorGenero'])->name('livros.genero');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
