@@ -65,49 +65,43 @@
 
     <!-- Products Start -->
     <div class="container-fluid pt-5">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">MAIS VENDIDOS</span></h2>
-        </div>
-        @if ($books instanceof \Illuminate\Database\Eloquent\Collection && $books->count() > 0)
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">MAIS VENDIDOS</span></h2>
+    </div>
+    @if ($books instanceof \Illuminate\Database\Eloquent\Collection && $books->count() > 0)
+    <div class="row px-xl-5 pb-3">
         @foreach ($books as $book)
-        <div class="row px-xl-5 pb-3">
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="card product-item border-0 mb-4">
+                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                     @if ($book->imagem)
                     <a href="{{ route('book.bookPage', $book->id) }}">
-                            <img  class="img-fluid w-100" src="{{ asset('storage/' . $book->imagem) }}" alt="{{ $book->nome }}" >
-                            </a>
-                            @else
-                            Sem imagem
-                        @endif    
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3"><a href="{{ route('book.bookPage', $book->id) }}">{{ $book->nome }}</a></h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>@if ($book->preco)
+                        <img class="img-fluid w-100" src="{{ asset('storage/' . $book->imagem) }}" alt="{{ $book->nome }}" style="width: 150px; height: 200px; object-fit: cover;">
+                    </a>
+                    @else
+                    Sem imagem
+                    @endif
+                </div>
+                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                    <h6 class="text-truncate mb-3" style="font-size: 14px; margin-left: 2px;"><a href="{{ route('book.bookPage', $book->id) }}">{{ $book->nome }}</a></h6>
+                    <div class="d-flex"  style="margin-left: 8px;">
+                        <h6>@if ($book->preco)
                             R$ {{ number_format($book->preco, 2, ',', '.') }}
-                        <!-- @else
-                            Preço não definido
-                        @endif</h6><h6 class="text-muted ml-2"><del>@if ($book->preco)
-                            R$ {{ number_format($book->preco, 2, ',', '.') }} -->
                         @else
                             Preço não definido
-                        @endif</del></h6>
-                        </div>
+                        @endif</h6>
                     </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
+                </div>
+                <div class="card-footer d-flex justify-content-between bg-light border">
                     <form action="{{ route('shop.cartAdd') }}" method="POST">
-                    @csrf
+                        @csrf
                         <input type="hidden" name="livro_id" value="{{ $book->id }}">
-                        <button type="submit" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
+                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Comprar</button>
                     </form>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    @endforeach
+        @endforeach
     <!-- Products End -->
     
 
