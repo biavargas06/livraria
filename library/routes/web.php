@@ -22,11 +22,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['get', 'post'], '/', function (Request $request) {
-    $cartItemCount = Carrinho::where('usuario_id', '=', 2)
-    ->count('carrinhos')
-    ->get();
 
-    
+    $userId = null;
+    if (Auth::check()) {
+        $userId = $request->user()->id;
+    }
+    $cartItemCount = Carrinho::where('usuario_id', '=', $userId)
+        ->count();
+
 
     $generos = Genero::all();
     $livrosQuery = Livro::query();

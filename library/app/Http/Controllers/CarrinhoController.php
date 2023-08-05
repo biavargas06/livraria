@@ -10,17 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class CarrinhoController extends Controller
 {
 
-    public function coutCart()
-    {
-        $cartItemCount = Carrinho::count();
-        die($cartItemCount);
 
-        View::share('cartItemCount', $cartItemCount);
-        return view('lY.cart');
-    }
 
-    public function cartPage()
+    public function cartPage(Request $request)
     {
+        $userId = null;
+        if (Auth::check()) {
+            $userId = $request->user()->id;
+        }
+        $cartItemCount = Carrinho::where('usuario_id', '=', $userId)
+            ->count();
         // Obtém o ID do usuário logado
         $userId = auth()->user()->id;
 
@@ -30,7 +29,7 @@ class CarrinhoController extends Controller
         // Carrega os dados dos livros associados aos itens do carrinho
         $carrinhoItems->load('livro');
 
-        return view('shop.cart', compact('carrinhoItems'));
+        return view('shop.cart', compact('carrinhoItems', 'cartItemCount'));
     }
 
 

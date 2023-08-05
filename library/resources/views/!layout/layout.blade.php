@@ -11,7 +11,7 @@
         <a href="{{route('home')}}">Livraria Amazing</a>
     </h1>
 
-    
+
 
     </div> <br><br>
 
@@ -22,15 +22,16 @@
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
+
                 <form action="{{ url('/') }}" method="POST">
                 @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar livro">
+                        <input type="text" name="busca" class="form-control" placeholder="Buscar livro">
                         <div class="input-group-append">
-                            
                         </div>
                     </div>
                 </form>
+
             </div>
             <div class="col-lg-3 col-6 text-right">
                 <a href="{{route('shop.cart')}}" class="btn border">
@@ -45,11 +46,11 @@
             <a href="{{ route('book') }}">Gerenciar Livros</a>
         @endif
         @else
-        
+
             <a href="{{ route('login') }}"><i class="fas fas fa-user-circle text-primary"></i></a>
         @endif
-                    
-                
+
+
             </div>
         </div>
     </div>

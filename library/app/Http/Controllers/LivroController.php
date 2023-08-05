@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrinho;
 use App\Models\Genero;
 use App\Models\Livro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +14,7 @@ class LivroController extends Controller
 {
 
 
-    
+
     public function book()
     {
         $generos = Genero::all();
@@ -66,8 +68,15 @@ class LivroController extends Controller
             'book' => $books,
         ]);
     }
-    public function livrosPorGenero($nome)
+    public function livrosPorGenero($nome, Request $request)
     {
+        $userId = null;
+        if (Auth::check()) {
+            $userId = $request->user()->id;
+        }
+        $cartItemCount = Carrinho::where('usuario_id', '=', $userId)
+            ->count();
+
         $livrosQuery = Livro::query();
 
         // Filtra os livros pelo gênero selecionado
@@ -91,14 +100,20 @@ class LivroController extends Controller
             ->groupBy('livros.id', 'livros.nome')
             ->get();
 
-        return view('welcome', compact('livros', 'generos', 'books', 'generoSelecionado'));
+        return view('welcome', compact('livros', 'generos', 'books', 'generoSelecionado', 'cartItemCount'));
     }
 
-    public function bookPage(Livro $books)
+    public function bookPage(Livro $books, Request $request)
     {
-        die;
+        $userId = null;
+        if (Auth::check()) {
+            $userId = $request->user()->id;
+        }
+        $cartItemCount = Carrinho::where('usuario_id', '=', $userId)
+            ->count();
+
         $generos = $books->generos()->pluck('nome')->implode(', ');
-        return view('book.view', compact('books', 'generos'));
+        return view('book.view', compact('books', 'generos', 'cartItemCount'));
     }
 
     public function editBook(Livro $books)
