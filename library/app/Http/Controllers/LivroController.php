@@ -173,17 +173,26 @@ class LivroController extends Controller
         return redirect()->route('book.view')->with('sucesso', 'Livro alterado com sucesso!');
     }
 
-    public function deleteBook(Livro $books)
+    public function deleteBook(Livro $book)
     {
         return view('book.deleteBook', [
-            'book' => $books,
+            'book' => $book,
         ]);
     }
-    public function deleteConfirmBook(Livro $books)
+
+    public function deleteConfirmBook(Livro $book)
     {
-        if ($books->imagem) {
+        // Verifica se há registros na tabela 'carrinhos' que referenciam o livro
+        $hasRelatedCarts = Carrinho::where('livro_id', $book->id)->exists();
+
+        if ($hasRelatedCarts) {
+            // Remove os registros do carrinho que referenciam o livro
+            Carrinho::where('livro_id', $book->id)->delete();
+        }
+
+        if ($book->imagem) {
             // Obtém o caminho completo da imagem no storage
-            $imagemPath = 'public/' . $books->imagem;
+            $imagemPath = 'public/' . $book->imagem;
 
             // Verifica se o arquivo existe no storage antes de tentar excluí-lo
             if (Storage::exists($imagemPath)) {
@@ -192,11 +201,13 @@ class LivroController extends Controller
             }
         }
 
-        $books->generos()->detach();
-        $books->delete();
+        $book->generos()->detach();
+        $book->delete();
 
         return redirect()->route('book.view')->with('sucesso', 'Livro apagado com sucesso!');
     }
+
+
 
 
 

@@ -87,8 +87,8 @@ Route::get('/new-book/book/book-page/{books}', [LivroController::class, 'bookPag
 Route::get('/new-book/book/edit/{books}', [LivroController::class, 'editBook'])->name('book.edit')->middleware('auth');
 Route::post('/new-book/book/edit/{books}', [LivroController::class, 'editSaveBook'])->name('book.editSave');
 
-Route::get('/new-book/book/delete/{books}', [LivroController::class, 'deleteBook'])->name('book.delete')->middleware('auth');
-Route::delete('/new-book/book/delete/{books}', [LivroController::class, 'deleteConfirmBook'])->name('book.deleteConfirm');
+Route::get('/new-book/book/delete/{book}', [LivroController::class, 'deleteBook'])->name('book.delete')->middleware('auth');
+Route::delete('/new-book/book/delete/{book}', [LivroController::class, 'deleteConfirmBook'])->name('book.deleteConfirm')->middleware('auth');
 
 Route::get('/new-book/genre', [LivroController::class, 'genre'])->name('genre')->middleware('auth');
 Route::post('/new-book/genre', [LivroController::class, 'newGenre'])->name('genre.newGenre');
