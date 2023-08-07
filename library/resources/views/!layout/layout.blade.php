@@ -36,8 +36,10 @@
                     <span class="badge">{{$cartItemCount}}</span>
                 </a>
                 @if (Auth::user())
+                <div style="display: inline-block;">
             {{ Auth::user()->nome }} <br>
-            <a href="{{ route('logout') }}">Logout</a> <br>
+            <a href="{{ route('logout') }}">Logout</a>
+        </div>
 
             @if (Auth::user() && Auth::user()->isAdmin)
             <a href="{{ route('book') }}">Gerenciar Livros</a>
