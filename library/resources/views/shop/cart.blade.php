@@ -145,7 +145,7 @@
 
     input[type="submit"]:hover,
     button:hover {
-        background-color: #B392AC;
+        background-color: #94774b;
     }
 
 .botao-finalizar {
