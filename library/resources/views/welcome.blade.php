@@ -102,43 +102,7 @@
     @if ($generoSelecionado)
         <h2>Gênero selecionado: {{ $generoSelecionado->nome }}</h2>
     @endif
-
-   
-    
-    
-    
-    
-           
-                <!-- <tr>        
-                    <td>
-                       
-                    </td>
-                    <td></td>
-                    <td>
-                        @if ($book->generos->count() > 0)
-                            {{ $book->generos->pluck('nome')->implode(', ') }}
-                        @else
-                            Sem gêneros associados
-                        @endif
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        <a href="{{ route('shop.checkout', ['id' => $book->id]) }}">Comprar</a>
-                    </td>
-
-
-                    <td>
-                        <form action="{{ route('shop.cartAdd') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="livro_id" value="{{ $book->id }}">
-                            <button type="submit">Adicionar ao Carrinho</button>
-                        </form>
-                    </td>
-                </tr> -->
-            
-        </table>
+        
     @elseif (is_string($books) && !empty($books))
         <p>Nenhum livro encontrado para o gênero: {{ $generoSelecionado->nome }}</p>
     @else
