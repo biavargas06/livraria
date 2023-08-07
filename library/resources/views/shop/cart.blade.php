@@ -1,10 +1,35 @@
 @extends('!layout.layout')
 
-@section('title', 'Livraria Goldberg')
+@section('title', 'Livraria Amazing')
 
 @section('content')
-    <h1>Carrinho de Compras</h1>
 
+
+<head>
+    <meta charset="utf-8">
+    <title>Livraria Amazing</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+     
+    <h1>Carrinho de Compras</h1>
     @if ($carrinhoItems->count() > 0)
         <table border="1">
             <tr>
@@ -13,7 +38,7 @@
                 <th>Preço Unitário</th>
                 <th>Quantidade</th>
                 <th>Subtotal</th>
-                <th>Ações</th>
+                <th>Remover</th>
             </tr>
             @foreach ($carrinhoItems as $item)
                 <tr>
@@ -55,10 +80,97 @@
 
         <!-- Acessando o primeiro item do carrinho para passar o ID do livro para a rota do Checkout -->
         <td>
-            <a href="{{ route('shop.checkoutFromCart', ['id' => $carrinhoItems[0]->livro->id]) }}">Finalizar Compra</a>
+            <a class="botao-finalizar" href="{{ route('shop.checkoutFromCart', ['id' => $carrinhoItems[0]->livro->id]) }}">Finalizar Compra</a>
         </td>
 
     @else
         <p>Nenhum item no carrinho.</p>
     @endif
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+    .cart-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    input[type="number"] {
+        width: 60px;
+        padding: 5px;
+    }
+
+    input[type="submit"],
+    button {
+        background-color: #AD9064;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    input[type="submit"]:hover,
+    button:hover {
+        background-color: #B392AC;
+    }
+
+.botao-finalizar {
+    margin: 0 auto;
+    width: 60%;
+    border-collapse: collapse;
+    display: flex;
+    justify-content: center;
+    padding: 10px 186px; 
+    background-color: #B392AC; 
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 2px solid #B392AC; 
+    transition: background-color 0.3s ease; 
+}
+.botao-finalizar:hover {
+    background-color: #8a577f; 
+    border-color: #8a577f; 
+}
+
+
+
+</style>
+
+
+
 @endsection
