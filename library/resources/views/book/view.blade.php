@@ -27,8 +27,9 @@
                     <legend>Sinopse:</legend>
                     {{ $books->sinopse }}
                 </fieldset>
-                <p>Editora: {{ $books->editora }}</p>
-                <p>Ano de Publicacao: {{ date('Y', strtotime($books->ano)) }}</p>
+                <p class="sinopse-spacing">Editora: {{ $books->editora }}</p>
+                <p>Ano de Publicação: {{ date('Y', strtotime($books->ano)) }}</p>
+                <p>N° de páginas: {{ $books->pag }}</p>
                 <p>Gênero(s):
                     @if ($books->generos->count() > 0)
                         {{ $books->generos->pluck('nome')->implode(', ') }}
@@ -45,7 +46,7 @@
                     <form action="{{ route('shop.cartAdd') }}" method="POST">
                         @csrf
                         <input type="hidden" name="livro_id" value="{{ $books->id }}">
-                        <button type="submit">Adicionar ao Carrinho</button>
+                        <button type="submit" class="add-button">Adicionar ao Carrinho</button>
                     </form>
                 </div>
             </div>
@@ -87,6 +88,10 @@
         flex: 1;
     }
 
+    .sinopse-spacing {
+        margin-top: 10px; 
+    }
+
     h1 {
         font-size: 28px;
         margin-bottom: 10px;
@@ -114,10 +119,10 @@
         font-weight: bold;
     }
 
-    button {
+    .add-button {
         display: inline-block;
         padding: 10px 20px;
-        margin-top: 15px;
+        margin-top: 20px;
         background-color: #AD9064;
         color: #fff;
         border: none;
@@ -125,7 +130,7 @@
         cursor: pointer;
     }
 
-    button:hover,
+    .add-button:hover,
     a:hover {
         background-color: #94774b;
     }
@@ -142,7 +147,7 @@
     .buy-button {
         display: inline-block;
         padding: 10px 20px;
-        margin-top: 15px;
+        margin-top: 20px;
         background-color: #B392AC;
         color: #fff;
         text-decoration: none;

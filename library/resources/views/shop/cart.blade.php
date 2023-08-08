@@ -63,7 +63,8 @@
                         <form action="{{ route('shop.cartRemove', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Remover</button>
+                            <button class="remover" type="submit"><i class="fa fa-trash" aria-hidden="true"></i>
+</button>
                         </form>
                     </td>
                 </tr>
@@ -111,7 +112,7 @@
     th, td {
         border: 1px solid #ccc;
         padding: 8px;
-        text-align: left;
+        text-align: center;
     }
 
     th {
@@ -146,6 +147,14 @@
     input[type="submit"]:hover,
     button:hover {
         background-color: #94774b;
+    }
+
+    .remover{
+    background-color: #CC314F;
+    }
+
+    .remover:hover{
+    background-color: red;
     }
 
 .botao-finalizar {
