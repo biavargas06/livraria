@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class LivroController extends Controller
 {
@@ -100,7 +101,9 @@ class LivroController extends Controller
             ->groupBy('livros.id', 'livros.nome')
             ->get();
 
-        return view('welcome', compact('livros', 'generos', 'books', 'generoSelecionado', 'cartItemCount'));
+        $generoSelecionado = Genero::where('nome', $nome)->first();
+
+        return view('genres.' . Str::slug($nome), compact('livros', 'generos', 'books', 'generoSelecionado', 'cartItemCount'));
     }
 
     public function bookPage(Livro $books, Request $request)
