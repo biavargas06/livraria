@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
+    <meta charset="utf-8">
+    <title>Livraria Amazing</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -14,7 +31,7 @@
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="{{route('home')}}" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold">
-                    <img src="{{ asset('imagens/amazing.png') }}"  style="width: 250px;">        
+                    <img src="{{ asset('imagens/amazing.png') }}"  style="width: 250px;">
                 </h1>
                 </a>
             </div>
@@ -54,16 +71,6 @@
         </div>
     </div>
 
-    <!-- <div class="content">
-        <form action="{{ url('/') }}" method="POST">
-            @csrf
-            <input type="text" name="busca" placeholder="Nome do Livro">
-            <input type="submit" value="Buscar">
-        </form>
-
-        <a href="{{route('shop.cart')}}">Carrinho de Compras</a>
-    <hr>
-    <div> -->
 
 
     @yield('content')

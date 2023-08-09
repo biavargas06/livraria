@@ -4,13 +4,14 @@
 
 @section('content')
 
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Livraria Amazing</title>
-</head>
-<body>
+
+
     <div class="container">
         <div class="book-info">
             <div class="book-image">
@@ -52,8 +53,7 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
 
 
 <style>
@@ -89,7 +89,7 @@
     }
 
     .sinopse-spacing {
-        margin-top: 10px; 
+        margin-top: 10px;
     }
 
     h1 {
