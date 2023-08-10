@@ -37,10 +37,12 @@
     <!-- Products Start -->
     <div class="container-fluid pt-5">
     <div class="text-center mb-4">
+        
     @if ($generoSelecionado)
         <h2>{{ $generoSelecionado->nome }}</h2>
-    @endif  
-    </div>
+    @endif    
+
+</div>
     @if ($books instanceof \Illuminate\Database\Eloquent\Collection && $books->count() > 0)
     <div class="row px-xl-5 pb-3">
         @foreach ($books as $book)
@@ -76,11 +78,6 @@
         </div>
         @endforeach
     <!-- Products End -->
-
-
-    @if ($generoSelecionado)
-        <h2>Gênero selecionado: {{ $generoSelecionado->nome }}</h2>
-    @endif
 
     @elseif (is_string($books) && !empty($books))
         <p>Nenhum livro encontrado para o gênero: {{ $generoSelecionado->nome }}</p>

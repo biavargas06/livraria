@@ -37,7 +37,9 @@
     <!-- Products Start -->
     <div class="container-fluid pt-5">
     <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">MAIS VENDIDOS</span></h2>
+    @if ($generoSelecionado)
+        <h2>{{ $generoSelecionado->nome }}</h2>
+    @endif  
     </div>
     @if ($books instanceof \Illuminate\Database\Eloquent\Collection && $books->count() > 0)
     <div class="row px-xl-5 pb-3">
@@ -67,18 +69,13 @@
                     <form action="{{ route('shop.cartAdd') }}" method="POST">
                         @csrf
                         <input type="hidden" name="livro_id" value="{{ $book->id }}">
-                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Adicionar ao Carrinho</button>
+                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Comprar</button>
                     </form>
                 </div>
             </div>
         </div>
         @endforeach
     <!-- Products End -->
-
-
-    @if ($generoSelecionado)
-        <h2>Gênero selecionado: {{ $generoSelecionado->nome }}</h2>
-    @endif
 
     @elseif (is_string($books) && !empty($books))
         <p>Nenhum livro encontrado para o gênero: {{ $generoSelecionado->nome }}</p>

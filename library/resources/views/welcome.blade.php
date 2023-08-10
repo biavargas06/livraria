@@ -67,7 +67,7 @@
                     <form action="{{ route('shop.cartAdd') }}" method="POST">
                         @csrf
                         <input type="hidden" name="livro_id" value="{{ $book->id }}">
-                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Adicionar ao Carrinho</button>
+                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Comprar</button>
                     </form>
                 </div>
             </div>
