@@ -104,8 +104,15 @@ class CarrinhoController extends Controller
 
         return redirect()->route('shop.cart');
     }
-    public function checkout($id)
+    public function checkout($id, Request $request)
     {
+        $userId = null;
+    if (Auth::check()) {
+        $userId = $request->user()->id;
+    }
+    $cartItemCount = Carrinho::where('usuario_id', '=', $userId)
+        ->count();
+
         // Verifica se o usuário está autenticado
         if (Auth::check()) {
             // Obtém o livro pelo ID
@@ -116,7 +123,7 @@ class CarrinhoController extends Controller
             }
 
             // Retorna a página de checkout diretamente, passando o livro selecionado
-            return view('shop.checkout', compact('livro'));
+            return view('shop.checkout', compact('livro', 'cartItemCount'));
         } else {
             return redirect()->route('login')->with('error', 'É necessário estar logado para acessar o checkout.');
         }

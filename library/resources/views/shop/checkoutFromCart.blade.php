@@ -89,7 +89,6 @@ p {
     color: #B392AC;
 }
 
-/* Estilos para a tabela */
 table {
     width: 80%;
     border-collapse: collapse;
