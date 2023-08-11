@@ -37,8 +37,8 @@
             <td>{{ $books->autor }}</td>
             <td>{{ $books->editora }}</td>
             <td>{{ $books->ano }}</td>
-            <td><a href="{{ route('book.edit', $books->id) }}">Editar</a></td>
-            <td><a href="{{ route('book.delete', $books->id) }}">Excluir</a></td>
+            <td><a href="{{ route('book.edit', $books->id) }}" class="action-link">Editar</a></td>
+            <td><a href="{{ route('book.delete', $books->id) }}" class="action-link">Excluir</a></td>
         </tr>
         @endforeach
     </table>
@@ -120,4 +120,18 @@
             background-color: #8a577f;
             color: white;
         }
-    </style>
+        
+
+        .action-link {
+        color: #8a577f;
+        text-decoration: none;
+        }
+
+
+        .action-link:hover {
+        text-decoration: none;
+        color: purple;
+        }
+
+
+</style>

@@ -226,7 +226,7 @@ class LivroController extends Controller
         ]);
 
         Genero::create($dados);
-        return redirect()->route('genre')->with('sucesso', 'Genero adicionado com sucesso!');
+        return redirect()->route('genre')->with('sucesso', 'Gênero adicionado com sucesso!');
 
     }
 
@@ -264,7 +264,7 @@ class LivroController extends Controller
         ]);
         $genero->fill($dados)->save();
 
-        return redirect()->route('genre.view')->with('sucesso', 'Genero alterado com sucesso!');
+        return redirect()->route('genre.view')->with('sucesso', 'Gênero alterado com sucesso!');
     }
 
 
@@ -278,7 +278,7 @@ class LivroController extends Controller
     {
         $genero->delete();
 
-        return redirect()->route('genre.view')->with('sucesso', 'Genero apagado com sucesso!');
+        return redirect()->route('genre.view')->with('sucesso', 'Gênero apagado com sucesso!');
     }
 
 }

@@ -1,6 +1,6 @@
 <div style="text-align: center; margin-top: 15%">
     <h2>Apagar Livro</h2>
-    <p>Voce esta apagando o livro: {{ $book->nome }}.</p>
+    <p>Você está apagando o livro: {{ $book->nome }}.</p>
 
     <form action="{{ route('book.deleteConfirm', $book->id) }}" method="POST">
         @csrf

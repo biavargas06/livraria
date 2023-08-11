@@ -1,6 +1,6 @@
 <div style="text-align: center; margin-top: 5%">
 
-    <h1>Adicionar Um Livro</h1>
+    <h1>Editar livro</h1>
 
     @if (session('sucesso'))
     <div>{{session('sucesso')}}</div>
@@ -26,12 +26,12 @@
     </div><br>
 
         <fieldset style="margin-left: 40%; margin-right: 40%">
-            <legend style="text-align: left">Data de Publicacao:</legend>
+            <legend style="text-align: left">Data de Publicação:</legend>
             <input type="date" name="ano" value="{{old('ano', $book->ano ?? '')}}"> <br>
         </fieldset>
 
         @if($book->imagem)
-        <label for="imagem">Imagem atual do Livro:</label> <br>
+        <label for="imagem">Imagem atual do livro:</label> <br>
         <img src="{{ asset('storage/' . $book->imagem) }}" alt="Imagem antiga do livro" width="200">
 
         <br>
@@ -56,3 +56,62 @@
 
     <a href="{{route('book.view')}}">Voltar</a>
 </div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    div {
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    h1 {
+        color: #AD9064;
+    }
+
+    div > label {
+        color: #8A577F;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select,
+    input[type="file"] {
+        width: 80%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #AD9064;
+        border-radius: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #AD9064;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #8A577F;
+    }
+
+    a {
+        color: #AD9064;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #8A577F;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
