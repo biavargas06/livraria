@@ -159,21 +159,23 @@
 
 .botao-finalizar {
     margin: 0 auto;
-    width: 60%;
-    border-collapse: collapse;
+    width: 90%;
     display: flex;
     justify-content: center;
     padding: 10px 186px; 
     background-color: #B392AC; 
     color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
+    border-radius: 5px;
     border: 2px solid #B392AC; 
     transition: background-color 0.3s ease; 
+    margin-bottom: 20px;
 }
+
 .botao-finalizar:hover {
     background-color: #8a577f; 
     border-color: #8a577f; 
+    color: #fff;
+
 }
 
 

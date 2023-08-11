@@ -73,6 +73,7 @@
         padding: 20px;
         background-color: #f0f0f0;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 35px;
     }
 
     .book-info {
@@ -112,11 +113,16 @@
         border: 1px solid #ccc;
         padding: 10px;
         margin-top: 15px;
+        
     }
 
     legend {
         font-size: 18px;
         font-weight: bold;
+    }
+    
+    legend{
+        margin-bottom: -10px;
     }
 
     .add-button {
@@ -130,8 +136,7 @@
         cursor: pointer;
     }
 
-    .add-button:hover,
-    a:hover {
+    .add-button:hover {
         background-color: #94774b;
     }
 
@@ -159,6 +164,8 @@
 
     .buy-button:hover {
         background-color: #8a577f;
+        color: #fff;
+
     }
 
     @media screen and (max-width: 600px) {

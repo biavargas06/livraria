@@ -1,9 +1,9 @@
 @extends('!layout.layout')
 
-@section('title', 'Livraria Goldberg - Checkout')
+@section('title', 'Livraria Amazing - Checkout')
 
 @section('content')
-    <h1>Checkout - Livraria Goldberg</h1>
+    <h1>Checkout - Livraria Amazing</h1>
 
     <h2>Detalhes da Compra:</h2>
 

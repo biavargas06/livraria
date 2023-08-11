@@ -68,7 +68,7 @@
                     <form action="{{ route('shop.cartAdd') }}" method="POST">
                         @csrf
                         <input type="hidden" name="livro_id" value="{{ $book->id }}">
-                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Adicionar ao Carrinho</button>
+                        <button type="submit" class="btn btn-sm text-dark p-0 d-flex justify-content-center align-items-center">Comprar</button>
                     </form>
                 </div>
             </div>
@@ -77,9 +77,7 @@
     <!-- Products End -->
 
 
-    @if ($generoSelecionado)
-        <h2>Gênero selecionado: {{ $generoSelecionado->nome }}</h2>
-    @endif
+ 
 
     @elseif (is_string($books) && !empty($books))
         <p>Nenhum livro encontrado para o gênero: {{ $generoSelecionado->nome }}</p>
